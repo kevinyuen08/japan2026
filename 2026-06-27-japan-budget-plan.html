@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪・名古屋 親子三代自遊行 — 詳細預算方案 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  background: #E8E2DA;
+  color: #2C2C2C;
+  font-size: 15px;
+  line-height: 1.6;
+}
+:root {
+  --navy: #1B3A5C;
+  --orange: #D4703A;
+  --green: #27AE60;
+  --gold: #B89420;
+  --cream: #F8F4EF;
+  --red: #C0392B;
+}
+
+.page {
+  width: 860px;
+  margin: 0 auto 48px;
+  background: #fff;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.14);
+  overflow: hidden;
+}
+
+/* PRINT BUTTON */
+.print-btn {
+  position: fixed; bottom: 28px; right: 28px;
+  background: var(--orange); color: #fff;
+  border: none; padding: 14px 26px; border-radius: 50px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(212,112,58,0.45);
+  font-family: inherit; z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+}
+.print-btn:hover { background: #B85C2A; }
+@media print {
+  .print-btn { display: none; }
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; width: 100%; }
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(150deg, #0D1F33 0%, #1B3A5C 60%, #2A5580 100%);
+  padding: 44px 52px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 6px; height: 100%;
+  background: linear-gradient(to bottom, #D4703A, #B89420);
+}
+.header-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.header-inner { position: relative; z-index: 2; }
+.header-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid rgba(212,112,58,0.6);
+  background: rgba(212,112,58,0.12);
+  color: #E8956A; padding: 5px 14px;
+  border-radius: 20px; font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; margin-bottom: 18px;
+}
+.header-title {
+  font-size: 36px; font-weight: 900; color: #fff;
+  line-height: 1.2; letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.header-title .accent { color: #E8956A; }
+.header-sub { color: #7AAAC8; font-size: 15px; letter-spacing: 1px; margin-bottom: 28px; }
+.header-info {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.header-chip {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff; padding: 7px 16px; border-radius: 7px;
+  font-size: 13px;
+}
+
+/* EXCHANGE RATE BANNER */
+.rate-banner {
+  background: #FFF8E0;
+  border-bottom: 2px solid #E0C84A;
+  padding: 11px 28px;
+  display: flex; align-items: center; gap: 16px;
+  font-size: 13px; color: #5A4200;
+}
+.rate-banner strong { color: var(--gold); font-weight: 700; }
+
+/* SECTION HEADER */
+.sec-hdr {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 24px;
+  background: var(--navy); color: #fff;
+}
+.sec-hdr-icon { font-size: 20px; }
+.sec-hdr-text { font-size: 15px; font-weight: 600; }
+.sec-hdr-sub { font-size: 12px; color: #7AAAC8; margin-left: auto; }
+.sec-hdr.orange { background: var(--orange); }
+.sec-hdr.green { background: #1A6B40; }
+.sec-hdr.dark { background: #1A1A1A; }
+.sec-hdr.gold { background: #7A5C0A; }
+
+/* SUMMARY CARDS */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 2px solid #E4DDD5;
+}
+.sum-card {
+  padding: 24px 28px;
+  border-right: 1px solid #E4DDD5;
+  text-align: center;
+}
+.sum-card:last-child { border-right: none; }
+.sum-label { font-size: 11px; color: #888; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px; }
+.sum-amount { font-size: 34px; font-weight: 900; color: var(--navy); line-height: 1; }
+.sum-amount .cur { font-size: 16px; font-weight: 600; color: var(--orange); margin-right: 3px; }
+.sum-amount .unit { font-size: 13px; font-weight: 400; color: #888; }
+.sum-note { font-size: 11px; color: #999; margin-top: 5px; }
+.sum-highlight .sum-amount { color: var(--orange); }
+
+/* CHART + TABLE LAYOUT */
+.chart-table-wrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  border-bottom: 2px solid #E4DDD5;
+}
+.chart-area {
+  padding: 24px 16px;
+  border-right: 1px solid #E4DDD5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.chart-area canvas { max-width: 240px; }
+.chart-legend { margin-top: 16px; width: 100%; }
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-bottom: 5px;
+  padding: 3px 0;
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.legend-name { flex: 1; color: #444; }
+.legend-pct { font-weight: 700; color: #222; font-size: 11px; }
+
+/* BUDGET TABLE */
+.budget-table-wrap { overflow-x: auto; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13.5px;
+}
+thead th {
+  background: var(--cream);
+  padding: 11px 14px;
+  font-weight: 700; color: var(--navy);
+  text-align: left;
+  border-bottom: 2px solid #D4C8BB;
+  white-space: nowrap;
+}
+thead th:not(:first-child) { text-align: right; }
+tbody tr { border-bottom: 1px solid #EDE8E2; }
+tbody tr:hover { background: #FAF7F4; }
+tbody td { padding: 10px 14px; }
+tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+.td-cat { font-weight: 600; color: var(--navy); }
+.td-sub { font-size: 11.5px; color: #777; margin-top: 2px; }
+.td-jpy { color: #888; font-size: 12.5px; }
+.td-hkd { font-weight: 700; color: #2C2C2C; }
+.td-ppx { color: #555; }
+tfoot td {
+  padding: 12px 14px; font-weight: 700;
+  background: #F0EBE4;
+  border-top: 2px solid #D4C8BB;
+}
+tfoot td:not(:first-child) { text-align: right; }
+tfoot .total-hkd { font-size: 17px; color: var(--orange); }
+.td-icon { font-size: 18px; margin-right: 6px; }
+.cat-dot {
+  display: inline-block; width: 9px; height: 9px;
+  border-radius: 50%; margin-right: 7px; flex-shrink: 0;
+}
+
+/* DAY TABLE */
+.day-section { border-bottom: 2px solid #E4DDD5; }
+.day-row-hdr {
+  display: grid; grid-template-columns: 90px 1fr auto;
+  padding: 13px 20px;
+  background: #F8F4EF;
+  border-bottom: 1px solid #E4DDD5;
+  align-items: center;
+}
+.day-num { font-size: 11px; color: var(--orange); font-weight: 700; letter-spacing: 1.5px; }
+.day-name { font-weight: 600; color: var(--navy); font-size: 14px; }
+.day-total { font-weight: 700; color: var(--navy); font-size: 15px; }
+.day-total span { color: var(--orange); }
+.day-items { padding: 0; }
+.day-item {
+  display: grid; grid-template-columns: 28px 1fr auto auto;
+  gap: 0 14px;
+  padding: 9px 20px 9px 20px;
+  border-bottom: 1px dashed #EEE8E0;
+  align-items: center;
+}
+.day-item:last-child { border-bottom: none; }
+.di-icon { font-size: 16px; text-align: center; }
+.di-name { font-size: 13.5px; color: #333; }
+.di-sub { font-size: 11px; color: #999; }
+.di-jpy { font-size: 12px; color: #999; text-align: right; white-space: nowrap; }
+.di-hkd { font-size: 13.5px; font-weight: 600; color: var(--navy); text-align: right; white-space: nowrap; }
+.tag-incl { background: #E8F5ED; color: #1A6B40; border: 1px solid #A0D8B4; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+.tag-est { background: #FEF0E4; color: #A84B14; border: 1px solid #F0BF98; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+.tag-var { background: #EEE6F8; color: #5B2D8E; border: 1px solid #C0A0DC; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+.tag-split { background: #E3EEF7; color: #1B3A5C; border: 1px solid #B5D3EA; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+
+/* PER PERSON TABLE */
+.pp-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-bottom: 2px solid #E4DDD5;
+}
+.pp-card {
+  padding: 20px 18px;
+  border-right: 1px solid #E4DDD5;
+  text-align: center;
+}
+.pp-card:last-child { border-right: none; }
+.pp-avatar { font-size: 32px; margin-bottom: 8px; }
+.pp-name { font-size: 12px; color: #888; margin-bottom: 12px; font-weight: 600; letter-spacing: 0.5px; }
+.pp-amount { font-size: 24px; font-weight: 900; color: var(--navy); }
+.pp-amount .cur { font-size: 12px; color: var(--orange); }
+.pp-note { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+/* TIPS */
+.tips-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 20px 24px;
+  background: #F8F4EF;
+}
+.tip-item {
+  padding: 10px 14px;
+  display: flex; gap: 10px;
+  align-items: flex-start;
+}
+.tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.tip-text { font-size: 12.5px; color: #444; line-height: 1.55; }
+.tip-text strong { color: var(--navy); }
+
+/* FOOTER */
+.footer {
+  background: var(--navy);
+  padding: 16px 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  color: rgba(255,255,255,0.5); font-size: 11px;
+}
+.footer strong { color: rgba(255,255,255,0.8); }
+
+/* NOTE BOX */
+.note-box {
+  background: #FFF8E0; border-left: 4px solid var(--gold);
+  padding: 12px 20px; margin: 0;
+  font-size: 12.5px; color: #5A4200; line-height: 1.65;
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ 列印 / 儲存 PDF</button>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-dots"></div>
+  <div class="header-inner">
+    <div class="header-tag">💴 詳細預算方案</div>
+    <div class="header-title">大阪・名古屋 <span class="accent">親子三代</span>自遊行</div>
+    <div class="header-sub">Osaka × Nagoya Family Trip 2026 — Budget Plan</div>
+    <div class="header-info">
+      <div class="header-chip">📅 2026年8月20—25日 · 6天5夜</div>
+      <div class="header-chip">👨‍👧 爸爸 × 爺爺奶奶 × 5歲小朋友（4人）</div>
+      <div class="header-chip">✈️ HKG→KIX | NGO→HKG</div>
+      <div class="header-chip">🏨 舒適型 · 4星酒店</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXCHANGE RATE BANNER -->
+<div class="rate-banner">
+  <span>💱</span>
+  <span>換算匯率：<strong>1 HKD ≈ 19.5 JPY</strong>（2026年規劃參考匯率，實際請以出發前匯率為準）</span>
+  <span style="margin-left:auto; color:#888;">※ 所有金額均為估算，實際費用因選擇而異</span>
+</div>
+
+<!-- SUMMARY -->
+<div class="sec-hdr orange">
+  <span class="sec-hdr-icon">📊</span>
+  <span class="sec-hdr-text">預算總覽</span>
+  <span class="sec-hdr-sub">4人合計</span>
+</div>
+<div class="summary-grid">
+  <div class="sum-card">
+    <div class="sum-label">基本預算（4人）</div>
+    <div class="sum-amount"><span class="cur">HKD</span>52,200<span class="unit"></span></div>
+    <div class="sum-note">不含購物及緊急備用</div>
+  </div>
+  <div class="sum-card sum-highlight">
+    <div class="sum-label">建議預備總額（4人）</div>
+    <div class="sum-amount"><span class="cur">HKD</span>62,000<span class="unit"></span></div>
+    <div class="sum-note">含購物 HKD 6,000 + 緊急備用 10%</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">人均費用（含購物）</div>
+    <div class="sum-amount"><span class="cur">HKD</span>15,500<span class="unit"></span></div>
+    <div class="sum-note">≈ JPY 302,250</div>
+  </div>
+</div>
+
+<!-- PIE CHART + TABLE -->
+<div class="sec-hdr">
+  <span class="sec-hdr-icon">🗂️</span>
+  <span class="sec-hdr-text">費用分類明細</span>
+  <span class="sec-hdr-sub">HKD / JPY 對照</span>
+</div>
+<div class="chart-table-wrap">
+  <div class="chart-area">
+    <canvas id="budgetChart"></canvas>
+    <div class="chart-legend" id="chartLegend"></div>
+  </div>
+  <div class="budget-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>費用類別</th>
+          <th>日圓（JPY）</th>
+          <th>港幣（HKD）</th>
+          <th>人均（HKD）</th>
+          <th>佔比</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#1B3A5C;"></span>
+            <span class="td-cat">✈️ 機票</span>
+            <div class="td-sub" style="padding-left:18px;">HKG→KIX + NGO→HKG · 4人經濟艙</div>
+          </td>
+          <td class="td-jpy">—</td>
+          <td class="td-hkd">19,200</td>
+          <td class="td-ppx">4,800</td>
+          <td>34%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#D4703A;"></span>
+            <span class="td-cat">🏨 住宿</span>
+            <div class="td-sub" style="padding-left:18px;">大阪3晚 + 名古屋2晚 · 4星 · 2間客房</div>
+          </td>
+          <td class="td-jpy">≈ JPY 272,000</td>
+          <td class="td-hkd">13,950</td>
+          <td class="td-ppx">3,490</td>
+          <td>25%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#27AE60;"></span>
+            <span class="td-cat">🚅 日本境內交通</span>
+            <div class="td-sub" style="padding-left:18px;">機場接送 + 地鐵 + 新幹線 + 名古屋交通</div>
+          </td>
+          <td class="td-jpy">≈ JPY 57,000</td>
+          <td class="td-hkd">2,920</td>
+          <td class="td-ppx">730</td>
+          <td>5%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#B89420;"></span>
+            <span class="td-cat">🎫 景點門票</span>
+            <div class="td-sub" style="padding-left:18px;">NIFREL · 空中庭園 · LEGOLAND · 科學館等</div>
+          </td>
+          <td class="td-jpy">≈ JPY 38,100</td>
+          <td class="td-hkd">1,950</td>
+          <td class="td-ppx">490</td>
+          <td>3%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#C0392B;"></span>
+            <span class="td-cat">🍱 餐飲</span>
+            <div class="td-sub" style="padding-left:18px;">早午晚餐 + 小食飲品 · 6天4人</div>
+          </td>
+          <td class="td-jpy">≈ JPY 132,000</td>
+          <td class="td-hkd">6,770</td>
+          <td class="td-ppx">1,690</td>
+          <td>12%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#8E44AD;"></span>
+            <span class="td-cat">🛍️ 購物 / 手信</span>
+            <div class="td-sub" style="padding-left:18px;">藥妝 · 紀念品 · 兒童玩具（可彈性調整）</div>
+          </td>
+          <td class="td-jpy">≈ JPY 117,000</td>
+          <td class="td-hkd">6,000</td>
+          <td class="td-ppx">1,500</td>
+          <td>11%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#17A589;"></span>
+            <span class="td-cat">🛡️ 旅遊保險</span>
+            <div class="td-sub" style="padding-left:18px;">4人全面保障 · 含行李遺失及醫療</div>
+          </td>
+          <td class="td-jpy">—</td>
+          <td class="td-hkd">1,400</td>
+          <td class="td-ppx">350</td>
+          <td>2%</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cat-dot" style="background:#95A5A6;"></span>
+            <span class="td-cat">📱 雜費</span>
+            <div class="td-sub" style="padding-left:18px;">WiFi Router · 行李寄存 · 洗衣等</div>
+          </td>
+          <td class="td-jpy">≈ JPY 6,000</td>
+          <td class="td-hkd">310</td>
+          <td class="td-ppx">80</td>
+          <td>1%</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="color:#888; font-size:12px;">小計</td>
+          <td class="td-hkd" style="font-size:15px; color:var(--navy);">51,500</td>
+          <td class="td-ppx" style="font-size:13px; font-weight:600;">12,875</td>
+          <td>93%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>🔒 緊急備用金（10%）</strong></td>
+          <td class="total-hkd">+ 5,150</td>
+          <td style="color:#888; font-size:12px;">人均 +1,288</td>
+          <td>7%</td>
+        </tr>
+        <tr>
+          <td colspan="2"><strong>🏁 建議預備總額（4人）</strong></td>
+          <td class="total-hkd" style="font-size:20px;">HKD 62,000</td>
+          <td style="font-weight:700; color:var(--orange); font-size:14px;">≈ 人均 15,500</td>
+          <td style="font-weight:700;">100%</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- DAY-BY-DAY -->
+<div class="sec-hdr green">
+  <span class="sec-hdr-icon">📅</span>
+  <span class="sec-hdr-text">每日消費預算（日本境內，不含機票保險）</span>
+  <span class="sec-hdr-sub">4人合計</span>
+</div>
+
+<!-- DAY 1 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 1 · 8月20日</div><div class="day-name">✈️ 香港 → 大阪</div></div>
+    <div style="font-size:12px; color:#888;">KIX抵埗 · 新世界・通天閣</div>
+    <div class="day-total">≈ <span>HKD 2,150</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🚌</div>
+      <div><div class="di-name">KIX → 大阪市區（HARUKA特急）</div><div class="di-sub">4人 · 成人×3 JPY 3,100 + 小童×1 JPY 1,550</div></div>
+      <div class="di-jpy">JPY 10,850</div>
+      <div class="di-hkd">HKD 556</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🗼</div>
+      <div><div class="di-name">通天閣入場費</div><div class="di-sub">成人 JPY 1,000 × 3 + 小童 JPY 500 × 1</div></div>
+      <div class="di-jpy">JPY 3,500</div>
+      <div class="di-hkd">HKD 179</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍜</div>
+      <div><div class="di-name">新世界晚餐（串炸 / 大阪燒）</div><div class="di-sub">4人 · 人均 JPY 2,500</div></div>
+      <div class="di-jpy">JPY 10,000</div>
+      <div class="di-hkd">HKD 513</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚇</div>
+      <div><div class="di-name">市內地鐵 + 雜費</div><div class="di-sub">ICOCA IC卡充值</div></div>
+      <div class="di-jpy">JPY 2,000</div>
+      <div class="di-hkd">HKD 103</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏨</div>
+      <div><div class="di-name">酒店住宿（大阪 · 2房）</div><div class="di-sub">4星 · 難波/心齋橋一帶 · 每房約 JPY 28,000</div></div>
+      <div class="di-jpy">JPY 56,000</div>
+      <div class="di-hkd">HKD 2,872</div>
+    </div>
+    <div class="day-item" style="background:#FFF8E0;">
+      <div class="di-icon">🍱</div>
+      <div><div class="di-name">早午餐（飛機餐 / 機場輕食）</div></div>
+      <div class="di-jpy">—</div>
+      <div class="di-hkd"><span class="tag-incl">機上餐</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 2 · 8月21日</div><div class="day-name">🐋 NIFREL · 梅田スカイビル</div></div>
+    <div style="font-size:12px; color:#888;">海遊館周邊 · 中之島散步</div>
+    <div class="day-total">≈ <span>HKD 5,000</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🍳</div>
+      <div><div class="di-name">早餐（酒店 / 便利店）</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🌊</div>
+      <div><div class="di-name">NIFREL 入場費</div><div class="di-sub">成人 JPY 2,300 × 3 + 3-12歲 JPY 1,100 × 1</div></div>
+      <div class="di-jpy">JPY 8,000</div>
+      <div class="di-hkd">HKD 410</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍱</div>
+      <div><div class="di-name">午餐（萬博公園附近）</div><div class="di-sub">4人 · 家庭餐廳 · 人均 JPY 1,500</div></div>
+      <div class="di-jpy">JPY 6,000</div>
+      <div class="di-hkd">HKD 308</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏙️</div>
+      <div><div class="di-name">梅田スカイビル 空中庭園</div><div class="di-sub">成人 JPY 2,000 × 3 + 4-11歲 JPY 1,000 × 1</div></div>
+      <div class="di-jpy">JPY 7,000</div>
+      <div class="di-hkd">HKD 359</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍷</div>
+      <div><div class="di-name">晚餐（中之島一帶）</div><div class="di-sub">4人 · 人均 JPY 3,500</div></div>
+      <div class="di-jpy">JPY 14,000</div>
+      <div class="di-hkd">HKD 718</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚇</div>
+      <div><div class="di-name">地鐵 + 交通費</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏨</div>
+      <div><div class="di-name">酒店住宿（大阪 · 第2晚）</div></div>
+      <div class="di-jpy">JPY 56,000</div>
+      <div class="di-hkd">HKD 2,872</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 3 · 8月22日</div><div class="day-name">🦕 自然史博物館 · 日本橋</div></div>
+    <div style="font-size:12px; color:#888;">大阪市立自然史博物館 · 電電城</div>
+    <div class="day-total">≈ <span>HKD 3,900</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🍳</div>
+      <div><div class="di-name">早餐</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🦴</div>
+      <div><div class="di-name">大阪市立自然史博物館</div><div class="di-sub">成人 JPY 300 × 3 · 中學生以下免費</div></div>
+      <div class="di-jpy">JPY 900</div>
+      <div class="di-hkd">HKD 46</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍱</div>
+      <div><div class="di-name">午餐（長居公園附近）</div><div class="di-sub">4人 · 人均 JPY 1,500</div></div>
+      <div class="di-jpy">JPY 6,000</div>
+      <div class="di-hkd">HKD 308</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🎮</div>
+      <div><div class="di-name">日本橋 電電城逛街</div><div class="di-sub">門票免費 · 購物另計</div></div>
+      <div class="di-jpy">—</div>
+      <div class="di-hkd"><span class="tag-var">購物另計</span></div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍣</div>
+      <div><div class="di-name">晚餐（難波一帶）</div><div class="di-sub">4人 · 人均 JPY 3,000</div></div>
+      <div class="di-jpy">JPY 12,000</div>
+      <div class="di-hkd">HKD 615</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚇</div>
+      <div><div class="di-name">地鐵 + 交通費</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 2,500</div>
+      <div class="di-hkd">HKD 128</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏨</div>
+      <div><div class="di-name">酒店住宿（大阪 · 第3晚）</div></div>
+      <div class="di-jpy">JPY 56,000</div>
+      <div class="di-hkd">HKD 2,872</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 4 · 8月23日</div><div class="day-name">⛩️ 住吉大社 · 🚅 新幹線 → 名古屋</div></div>
+    <div style="font-size:12px; color:#888;">四天王寺 → 新大阪 → 名古屋</div>
+    <div class="day-total">≈ <span>HKD 5,350</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🍳</div>
+      <div><div class="di-name">早餐 + 行李整理</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">⛩️</div>
+      <div><div class="di-name">住吉大社</div><div class="di-sub">入場免費</div></div>
+      <div class="di-jpy">—</div>
+      <div class="di-hkd"><span class="tag-incl">免費</span></div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏯</div>
+      <div><div class="di-name">四天王寺 伽藍境内</div><div class="di-sub">成人 JPY 500 × 3 · 小童免費</div></div>
+      <div class="di-jpy">JPY 1,500</div>
+      <div class="di-hkd">HKD 77</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍱</div>
+      <div><div class="di-name">午餐（大阪市區）</div><div class="di-sub">4人 · 人均 JPY 1,500</div></div>
+      <div class="di-jpy">JPY 6,000</div>
+      <div class="di-hkd">HKD 308</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚅</div>
+      <div><div class="di-name">新幹線 新大阪 → 名古屋（Hikari · 指定席）</div><div class="di-sub">成人 JPY 7,260 × 3 + 小童 JPY 3,640 × 1</div></div>
+      <div class="di-jpy">JPY 25,420</div>
+      <div class="di-hkd">HKD 1,303</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍽️</div>
+      <div><div class="di-name">晚餐（名古屋名物：矢場味噌炸豬排）</div><div class="di-sub">4人 · 人均 JPY 2,500</div></div>
+      <div class="di-jpy">JPY 10,000</div>
+      <div class="di-hkd">HKD 513</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚇</div>
+      <div><div class="di-name">交通（大阪地鐵 + 名古屋地鐵）</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,500</div>
+      <div class="di-hkd">HKD 179</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏨</div>
+      <div><div class="di-name">酒店住宿（名古屋 · 2房 · 第1晚）</div><div class="di-sub">4星 · 每房約 JPY 26,000</div></div>
+      <div class="di-jpy">JPY 52,000</div>
+      <div class="di-hkd">HKD 2,667</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 5 · 8月24日</div><div class="day-name">🧱 LEGOLAND / ⛩️ 熱田神宮（雙路線）</div></div>
+    <div style="font-size:12px; color:#888;">A路線：爸爸 + 小朋友 / B路線：爺爺奶奶</div>
+    <div class="day-total">≈ <span>HKD 5,400</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🍳</div>
+      <div><div class="di-name">早餐（酒店 / 便利店）</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item" style="background:#EEF6FF;">
+      <div class="di-icon">🧱</div>
+      <div>
+        <div class="di-name">LEGOLAND® Japan Resort <span class="tag-split">A路線</span></div>
+        <div class="di-sub">爸爸 × 小朋友 · 成人 JPY 7,400 + 小童（3-12歲）JPY 6,000（8月暑假價）</div>
+      </div>
+      <div class="di-jpy">JPY 13,400</div>
+      <div class="di-hkd">HKD 687</div>
+    </div>
+    <div class="day-item" style="background:#EEF6FF;">
+      <div class="di-icon">🍔</div>
+      <div>
+        <div class="di-name">LEGOLAND 園內午餐 <span class="tag-split">A路線</span></div>
+        <div class="di-sub">爸爸 + 小朋友 · 人均 JPY 2,000</div>
+      </div>
+      <div class="di-jpy">JPY 4,000</div>
+      <div class="di-hkd">HKD 205</div>
+    </div>
+    <div class="day-item" style="background:#F0FFF4;">
+      <div class="di-icon">⛩️</div>
+      <div>
+        <div class="di-name">熱田神宮 <span class="tag-split">B路線</span></div>
+        <div class="di-sub">爺爺奶奶 · 免費參拜</div>
+      </div>
+      <div class="di-jpy">—</div>
+      <div class="di-hkd"><span class="tag-incl">免費</span></div>
+    </div>
+    <div class="day-item" style="background:#F0FFF4;">
+      <div class="di-icon">🏯</div>
+      <div>
+        <div class="di-name">名古屋城 <span class="tag-split">B路線</span></div>
+        <div class="di-sub">爺爺奶奶 · 成人 JPY 500 × 2</div>
+      </div>
+      <div class="di-jpy">JPY 1,000</div>
+      <div class="di-hkd">HKD 51</div>
+    </div>
+    <div class="day-item" style="background:#F0FFF4;">
+      <div class="di-icon">🍜</div>
+      <div>
+        <div class="di-name">爺爺奶奶午餐（大須商店街 / 錦三丁目）<span class="tag-split">B路線</span></div>
+        <div class="di-sub">2人 · 人均 JPY 2,000</div>
+      </div>
+      <div class="di-jpy">JPY 4,000</div>
+      <div class="di-hkd">HKD 205</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍽️</div>
+      <div><div class="di-name">晚餐（全家團聚 · 名古屋台所）</div><div class="di-sub">4人 · 人均 JPY 4,000</div></div>
+      <div class="di-jpy">JPY 16,000</div>
+      <div class="di-hkd">HKD 821</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚇</div>
+      <div><div class="di-name">交通（港區往返 + 地鐵）</div><div class="di-sub">4人（兩組各自交通）</div></div>
+      <div class="di-jpy">JPY 4,000</div>
+      <div class="di-hkd">HKD 205</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🏨</div>
+      <div><div class="di-name">酒店住宿（名古屋 · 第2晚）</div></div>
+      <div class="di-jpy">JPY 52,000</div>
+      <div class="di-hkd">HKD 2,667</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day-section">
+  <div class="day-row-hdr">
+    <div><div class="day-num">DAY 6 · 8月25日</div><div class="day-name">🔬 名古屋市科學館 ✈️ → 香港</div></div>
+    <div style="font-size:12px; color:#888;">NGO → HKG 傍晚航班</div>
+    <div class="day-total">≈ <span>HKD 2,150</span></div>
+  </div>
+  <div class="day-items">
+    <div class="day-item">
+      <div class="di-icon">🍳</div>
+      <div><div class="di-name">早餐 + 退房</div><div class="di-sub">4人</div></div>
+      <div class="di-jpy">JPY 3,000</div>
+      <div class="di-hkd">HKD 154</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🔭</div>
+      <div><div class="di-name">名古屋市科學館（世界最大天象儀）</div><div class="di-sub">成人 JPY 800 × 3 + 小童 JPY 400 × 1（天象儀另收費）</div></div>
+      <div class="di-jpy">JPY 2,800</div>
+      <div class="di-hkd">HKD 144</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🍱</div>
+      <div><div class="di-name">午餐（栄 / 大津通一帶）</div><div class="di-sub">4人 · 人均 JPY 1,500</div></div>
+      <div class="di-jpy">JPY 6,000</div>
+      <div class="di-hkd">HKD 308</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">🚆</div>
+      <div><div class="di-name">名古屋駅 → 中部国際空港（名鐵特急）</div><div class="di-sub">成人 JPY 1,250 × 3 + 小童 JPY 640 × 1</div></div>
+      <div class="di-jpy">JPY 4,390</div>
+      <div class="di-hkd">HKD 225</div>
+    </div>
+    <div class="day-item">
+      <div class="di-icon">✈️</div>
+      <div><div class="di-name">機場餐食 + 雜費</div><div class="di-sub">4人 · 最後一次購物及等候</div></div>
+      <div class="di-jpy">JPY 6,000</div>
+      <div class="di-hkd">HKD 308</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE BOX -->
+<div class="note-box">
+  ⚠️ <strong>注意：</strong>以上每日合計為參考估算。部分日子住宿費已計入當日，實際可按「住宿一次過結算」方式分開記錄。Day1–Day4 每晚大阪住宿（2房 × JPY 28,000）已分別列入 Day1、Day2、Day3，Day4+Day5名古屋（2房 × JPY 26,000）已列入 Day4、Day5。
+</div>
+
+<!-- PER PERSON -->
+<div class="sec-hdr gold">
+  <span class="sec-hdr-icon">👥</span>
+  <span class="sec-hdr-text">人均費用分析</span>
+  <span class="sec-hdr-sub">基本預算（不含購物）</span>
+</div>
+<div class="pp-grid">
+  <div class="pp-card">
+    <div class="pp-avatar">👨</div>
+    <div class="pp-name">爸爸 (Kevin)</div>
+    <div class="pp-amount"><span class="cur">HKD </span>15,800</div>
+    <div class="pp-note">含 LEGOLAND 全日費用</div>
+  </div>
+  <div class="pp-card">
+    <div class="pp-avatar">👴</div>
+    <div class="pp-name">爺爺</div>
+    <div class="pp-amount"><span class="cur">HKD </span>13,900</div>
+    <div class="pp-note">Day5 B路線：神社 + 名古屋城</div>
+  </div>
+  <div class="pp-card">
+    <div class="pp-avatar">👵</div>
+    <div class="pp-name">奶奶</div>
+    <div class="pp-amount"><span class="cur">HKD </span>13,900</div>
+    <div class="pp-note">Day5 B路線：神社 + 名古屋城</div>
+  </div>
+  <div class="pp-card">
+    <div class="pp-avatar">👧</div>
+    <div class="pp-name">小朋友（5歲）</div>
+    <div class="pp-amount"><span class="cur">HKD </span>8,600</div>
+    <div class="pp-note">新幹線免費 · 多數景點小童優惠</div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="sec-hdr dark">
+  <span class="sec-hdr-icon">💡</span>
+  <span class="sec-hdr-text">預算省錢貼士</span>
+</div>
+<div class="tips-grid">
+  <div class="tip-item">
+    <div class="tip-icon">✈️</div>
+    <div class="tip-text"><strong>機票</strong>：提早3-4個月訂購，8月為旺季，國泰 / ANA / JAL 可設價格提示。HK Express 單程 KIX 或會更便宜但需加行李費。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🏨</div>
+    <div class="tip-text"><strong>住宿</strong>：可考慮訂帶廚房的 Airbnb 公寓，4人共用一間，節省一半住宿費，同時適合老人家和小朋友。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🎫</div>
+    <div class="tip-text"><strong>門票</strong>：LEGOLAND 建議提前在官網或 Klook 購買，有時優惠票比門口便宜 10-20%。小朋友2歲以下免費。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🚇</div>
+    <div class="tip-text"><strong>交通</strong>：購買 ICOCA + 新幹線組合（e5489 預訂 EX 優惠票）可省約 JPY 2,000。大阪一日乘車券 JPY 820 適合密集出行日。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🍱</div>
+    <div class="tip-text"><strong>餐飲</strong>：早餐可善用便利店（7-11、Family Mart），食物質素高且便宜。午餐選定食套餐，晚餐才選餐廳。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">💱</div>
+    <div class="tip-text"><strong>換錢</strong>：可在 Wise 換 JPY 備用，或用 Charles Schwab 卡免手續費提款。避免機場兌換，匯率較差。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">📱</div>
+    <div class="tip-text"><strong>上網</strong>：建議購買日本 eSIM（Ubigi / Airalo）約 HKD 100-150 / 10天 10GB，比 Wifi Router 便宜且方便。</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🛍️</div>
+    <div class="tip-text"><strong>購物</strong>：藥妝店出示護照可享免稅（消費稅10%），5,500日圓以上即可申請。松本清、大國藥妝比較格。</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>📄 大阪・名古屋 親子三代自遊行 2026 — 詳細預算方案</span>
+  <span>製作日期：2026年6月27日 ｜ <strong>所有金額僅供參考</strong>，以實際報價為準</span>
+</div>
+
+</div><!-- end page -->
+
+<script>
+const data = {
+  labels: ['機票', '住宿', '境內交通', '景點門票', '餐飲', '購物手信', '旅遊保險', '雜費'],
+  datasets: [{
+    data: [19200, 13950, 2920, 1950, 6770, 6000, 1400, 310],
+    backgroundColor: ['#1B3A5C','#D4703A','#27AE60','#B89420','#C0392B','#8E44AD','#17A589','#95A5A6'],
+    borderWidth: 2,
+    borderColor: '#fff',
+    hoverOffset: 6,
+  }]
+};
+const ctx = document.getElementById('budgetChart').getContext('2d');
+new Chart(ctx, {
+  type: 'doughnut',
+  data: data,
+  options: {
+    responsive: true,
+    cutout: '60%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const val = context.raw;
+            const total = context.dataset.data.reduce((a,b)=>a+b,0);
+            const pct = Math.round(val/total*100);
+            return ` HKD ${val.toLocaleString()} (${pct}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// Build legend
+const legend = document.getElementById('chartLegend');
+const colors = data.datasets[0].backgroundColor;
+const total = data.datasets[0].data.reduce((a,b)=>a+b,0);
+data.labels.forEach((label, i) => {
+  const val = data.datasets[0].data[i];
+  const pct = Math.round(val/total*100);
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `
+    <div class="legend-dot" style="background:${colors[i]}"></div>
+    <div class="legend-name">${label}</div>
+    <div class="legend-pct">${pct}%</div>
+  `;
+  legend.appendChild(item);
+});
+</script>
+
+</body>
+</html>
